@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecipesService } from '../recipes.service';
 import { Recipe } from '../recipe.model';
 
@@ -8,10 +8,11 @@ import { Recipe } from '../recipe.model';
   templateUrl: './recipe-detail.page.html',
   styleUrls: ['./recipe-detail.page.scss'],
 })
+
 export class RecipeDetailPage implements OnInit {
   loadedRecipe: Recipe;
 
-  constructor(private actvatedRoute: ActivatedRoute, private recipesSrv: RecipesService) { }
+  constructor(private actvatedRoute: ActivatedRoute, private recipesSrv: RecipesService, private router: Router) { }
 
   ngOnInit() {
     // Observable thats why subscribe
@@ -26,6 +27,11 @@ export class RecipeDetailPage implements OnInit {
         }
       }
     );
+  }
+
+  onDelete() {
+    this.recipesSrv.deleteRecipe(this.loadedRecipe.id);
+    this.router.navigate(['/recipes']);
   }
 
 }
