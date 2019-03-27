@@ -36,6 +36,7 @@ export class RecipesService {
   }
 
   deleteRecipe(recipeId: string) {
+    // if true keeps element if not deletes
     this.recipes = this.recipes.filter(recipe => {
       return recipe.id !== recipeId;
     });
